@@ -1,2 +1,3 @@
 cd C:\Users\Usuario\smartbar
-ssh -i smartbar-key.pem ubuntu@54.235.70.122
+ssh -i smartbar-key.pem ubuntu@100.30.248.5
+http://100.30.248.5/

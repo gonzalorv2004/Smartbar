@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: smartbar-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    image: node:18
+    container_name: smartbar-backend
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "3000:3000"
+    command: npm start
+    depends_on:
+      - database
+      - redis
+    restart: always
+
+  database:
+    image: postgres:15
+    container_name: smartbar-db
+    environment:
+      POSTGRES_USER: smartbar
+      POSTGRES_PASSWORD: smartbar123
+      POSTGRES_DB: smartbar
+    ports:
+      - "5432:5432"
+    restart: always
+
+  redis:
+    image: redis:7
+    container_name: smartbar-redis
+    ports:
+      - "6379:6379"
+    restart: always

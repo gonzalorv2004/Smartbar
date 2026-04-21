@@ -44,3 +44,13 @@ services:
     ports:
       - "6379:6379"
     restart: always
+
+adminer:
+  image: adminer
+  container_name: smartbar-adminer
+  ports:
+    - "8090:8080"
+  depends_on:
+    - database
+  restart: always
+  

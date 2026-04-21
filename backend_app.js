@@ -44,3 +44,26 @@ app.post("/pedido", async (req, res) => {
 app.listen(3000, () => {
     console.log("Servidor en puerto 3000");
 });
+
+app.get("/pedidos", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT 
+                p.id AS pedido,
+                u.nombre AS usuario,
+                pr.nombre AS producto,
+                dp.cantidad
+            FROM pedidos p
+            JOIN usuarios u ON p.id_usuario = u.id
+            JOIN detalle_pedido dp ON p.id = dp.id_pedido
+            JOIN productos pr ON dp.id_producto = pr.id
+            ORDER BY p.id;
+        `);
+
+        res.json(result.rows);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error al obtener pedidos" });
+    }
+});

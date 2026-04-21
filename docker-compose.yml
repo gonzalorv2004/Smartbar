@@ -9,6 +9,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx:/etc/nginx/conf.d
+      - ./frontend:/usr/share/nginx/html
     depends_on:
       - backend
     restart: always
@@ -24,7 +25,6 @@ services:
     command: sh -c "npm install && npm start"
     depends_on:
       - database
-      - redis
     restart: always
 
   database:

@@ -20,14 +20,12 @@ app.post("/pedido", async (req, res) => {
     const { id_producto, cantidad } = req.body;
 
     try {
-        // Crear pedido
         const pedido = await pool.query(
             "INSERT INTO pedidos (id_usuario, estado) VALUES (1, 'pendiente') RETURNING id"
         );
 
         const id_pedido = pedido.rows[0].id;
 
-        // Insertar detalle
         await pool.query(
             "INSERT INTO detalle_pedido (id_pedido, id_producto, cantidad) VALUES ($1, $2, $3)",
             [id_pedido, id_producto, cantidad]
@@ -41,8 +39,33 @@ app.post("/pedido", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log("Servidor en puerto 3000");
+app.post("/pedido-completo", async (req, res) => {
+
+    const { productos } = req.body;
+
+    try {
+
+        // 1. Crear pedido
+        const pedido = await pool.query(
+            "INSERT INTO pedidos (id_usuario, estado) VALUES (1, 'pendiente') RETURNING id"
+        );
+
+        const id_pedido = pedido.rows[0].id;
+
+        // 2. Insertar todos los productos
+        for (let p of productos) {
+            await pool.query(
+                "INSERT INTO detalle_pedido (id_pedido, id_producto, cantidad) VALUES ($1, $2, $3)",
+                [id_pedido, p.id_producto, p.cantidad]
+            );
+        }
+
+        res.json({ mensaje: "Pedido completo guardado" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error al guardar pedido" });
+    }
 });
 
 app.get("/pedidos", async (req, res) => {
@@ -66,4 +89,8 @@ app.get("/pedidos", async (req, res) => {
         console.error(error);
         res.status(500).json({ error: "Error al obtener pedidos" });
     }
+});
+
+app.listen(3000, () => {
+    console.log("Servidor en puerto 3000");
 });

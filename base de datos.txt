@@ -1,0 +1,6 @@
+http://100.30.248.5:8090
+Sistema: PostgreSQL
+Servidor: 172.18.0.4
+Usuario: smartbar
+Password: smartbar123
+Base de datos: smartbar

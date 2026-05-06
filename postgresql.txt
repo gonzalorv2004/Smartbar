@@ -42,7 +42,7 @@ ALTER TABLE detalle_pedido
 ALTER COLUMN id_pedido SET NOT NULL;
 
 ALTER TABLE detalle_pedido
-ALTER COLUMN id_producto SET NOT NULL
+ALTER COLUMN id_producto SET NOT NULL;
 
 🧩 PASO 1: Insertar usuario
 INSERT INTO usuarios (nombre, email, password, rol)

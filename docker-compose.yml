@@ -40,6 +40,9 @@ services:
       - "5432:5432"
     restart: always
 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   redis:
     image: redis:7
     container_name: smartbar-redis
@@ -55,3 +58,6 @@ services:
     depends_on:
       - database
     restart: always
+
+volumes:
+  postgres_data:

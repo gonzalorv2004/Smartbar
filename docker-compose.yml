@@ -14,6 +14,14 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - backend
+      - php
+    restart: always
+
+  php:
+    build: ./php
+    container_name: smartbar-php
+    volumes:
+      - ./frontend:/usr/share/nginx/html
     restart: always
 
   backend:
@@ -48,15 +56,6 @@ services:
     container_name: smartbar-redis
     ports:
       - "6379:6379"
-    restart: always
-
-  adminer:
-    image: adminer
-    container_name: smartbar-adminer
-    ports:
-      - "8090:8080"
-    depends_on:
-      - database
     restart: always
 
 volumes:

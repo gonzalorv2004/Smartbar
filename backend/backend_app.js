@@ -101,22 +101,22 @@ app.get("/pedidos", async (req, res) => {
 
 // Marcar como servido
 app.put("/pedido/:id/servido", async (req, res) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  try {
-    await pool.query(
-      "UPDATE pedidos SET estado = 'servido' WHERE id = $1",
-      [id]
-    );
+    try {
+        await pool.query(
+            "UPDATE pedidos SET estado = 'servido' WHERE id = $1",
+            [id]
+        );
 
-    res.json({ mensaje: "Pedido servido" });
+        res.json({ mensaje: "Pedido servido" });
 
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al actualizar pedido" });
-  }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error al actualizar pedido" });
+    }
 });
 
 app.listen(3000, () => {
-  console.log("Servidor en puerto 3000");
+    console.log("Servidor en puerto 3000");
 });

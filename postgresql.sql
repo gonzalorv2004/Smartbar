@@ -42,11 +42,17 @@ ALTER TABLE detalle_pedido
 ALTER COLUMN id_pedido SET NOT NULL;
 
 ALTER TABLE detalle_pedido
-ALTER COLUMN id_producto SET NOT NULL
+ALTER COLUMN id_producto SET NOT NULL;
 
 🧩 PASO 1: Insertar usuario
 INSERT INTO usuarios (nombre, email, password, rol)
-VALUES ('Gonzalo', 'gonzalo@smartbar.com', '1234', 'admin');
+VALUES
+('Gonzalo', 'gonzalo@smartbar.com', '1234', 'admin'),
+('Antonio Carlos', 'ac@smartbar.com', '1234', 'camarero'),
+('Alejandro', 'alex@smartbar.com', '1234', 'cocina'),
+('Diego', 'diego@smartbar.com', '1234', 'camarero'),
+('Juan Pedro', 'jp@smartbar.com', '1234', 'cocina');
+
 
 🧩 PASO 2: Insertar productos
 INSERT INTO productos (nombre, precio, stock)

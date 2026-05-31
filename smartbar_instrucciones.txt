@@ -1,0 +1,72 @@
+Muy bien ahora lo siguiente:
+1º Quiero que en frontend_php_ver_acceso.php ponga abajo del botón Iniciar sesión
+aparezca una oración que ponga "¿Deseas solicitar un puesto de empleo? y que esta
+contenga un enlace que nos transporte a un formulario donde aparecera lo siguiente
+- 1 rectangulo donde tendra que poner su nombre y sus apellidos (obligatorio)
+- 1 rectangulo donde tendra que poner su numero de telefono (obligatorio)
+- 1 rectangulo donde tendra que poner su DNI (obligatorio)
+- 1 rectangulo donde tendra que poner su correo electronico (obligatorio)
+- 1 cuadradito suyo donde poder colocar una foto suya (obligatorio)
+- 1 rectangulo donde tendra que poner su fecha de nacimiento (obligatorio)
+- 1 rectangulo donde tendra que poner su Dirección (obligatorio)
+- La opción de indicar el genero (hombre, mujer) (opcional)
+- La opción de indicar el pusto de trabajo que desea solicitar (camarero, cocinero, 
+  conserje, administrador) (obligatorio)
+- Un lugar donde el que solicite el puesto de trabajo indique porque deberiamos de 
+  contratarlo (obliagtorio)
+- Un lugar donde poder arrastrar el curriculum suyo (obliagtorio)
+- Un boton donde se le de a guardar y nos vuelva directamente a frontend_index.html
+  y al mismo tiempo la información se guarde en formato pdf que ponga
+  "(Nombre completo del que solicite trabajo) ha solicitado trabajo como (Nombre del empleo que ha solicitado)" 
+   con la parte donde diga curriculum nos de la opción descarga el curriculum con Ctrl+Clic Izquierdo
+
+2º Quiero que en frontend_php_acceso.php cuando introduzcamos el nombre 
+del usuario y la contraseña de un usuario con el rol camarero nos transporte
+a un archivo con un titulo en <h1> que ponga "¿Como lo quiere el cliente?" y abajo
+dos botones, uno llamado "Para llevar" que nos transporte al archivo frontend_php_pedido.php
+pero ahora llamandose frontend_php_pedido_llevar.php y el otro botón llamado "Para tomar" 
+que nos trasnporte al archivo frontend_php_pedido_tomar.php, pero cambiando los datos del cliente 
+por una sección donde pongamos el numero de la mesa donde esta sentado el cliente.
+
+3º Quiero que en frontend_php_cocina.php aparazca dos tablas
+1 con los datos de los pedidos realizados en frontend_php_pedido_llevar.php y el otro
+con los datos de los pedidos realizados en frontend_php_pedido_tomar.php pero que 
+los deberan tenr una columna llamado estado y que a cada pedido nos de un boton 
+que ponga en preparación servido y que al darle clic cambie automaticamente el estado 
+de pendiente a en preparación y al mismo tiempo nos aparazca un boton llamado servido 
+donde estaba el boton en preparación y que al darle clic cambie automaticamente el estado 
+de en preparación a servidoy al mismo tiempo nos aparazca un boton llamado finalizado donde estaba
+el boton en servido y que al darle clic cambie automaticamente el estado de servido a finalizado.
+Y abajo nos permita enviarle mensajes en caso de que falte ingredientes, para que este pueda encargar mas
+y recibir mensajes del gerente y la posibilidad de borralos con un boton X  que nos apareca al lado.
+
+4º Quiero que cuando se introduzca el nombre de usuario y la contresaña de de un usuario con el rol conserje
+nos transporte a un archivo .html que nos permita eniarle mensajes al gerente en caso de que falten materiales 
+de limpieza.
+
+5º Quiero que cuando se introduzca el nombre de usuario y la contresaña del gerente este nos transporte 
+al archivo frontend_php_gerente.php y en ella aparezca 4 tablas distintas
+1 con los datos de la tabla usuarios, pero que este nos de la opción de cambiar el tipo de rol que tiene y una columna
+que ponga el turno en el que trabaja
+1 con los datos de los pedidos realizados en frontend_php_pedido_tomar.php
+1 con los datos de los pedidos realizados en frontend_php_pedido_llevar.php
+1 con los datos de aquellos que quieran solicitar trabajo aqui con 6 columnas:
+  - Nombre Completo (debe aparecer su nombre y sus apellidos)
+  - Dni
+  - Dirección
+  - Correo Electronico
+  - Formulario: debe aparecer la frase ""Nombre completo del que solicite trabajo" ha solicitado tarabajo" 
+    y tenga un enlace que descargue el pdf que el solicitante creo al rellenar el formulario).
+  - Decisión debe aparecer dos botones:
+    * Uno llamado rechazado que haga dos cosas a la vez, la primera enviar automaticamente un correo electronico 
+      a su gmail que ponga "los siento no cumple con los requisitos necesarios para trabajar aqui" y la segunda es 
+      que se borre automaticamente de la tabla.
+    * Uno llamado contratado que nos transporte a un archivo donde deberemos de elegir si el solicitante trabajara 
+      en el turno de dia, de tarde o de Noche con botones y una vez elegido uno botones haga dos cosas a la vez, la 
+      primera que se borre automaticamente de la tabla y aparezca automaticamente en la tabla usuarios y la segunda 
+      que envie automaticamente un correo electronico que variara dependiendo del turno que se haya elegido, 
+      (Luego indico cuales son esos correos)
+Y abajo podamos ver todos los mensajes que nos han enviado los empleados con el rol cocina o conserje y quien lo ha enviado
+y al lado un boton con el emoji del pulgar arriba que al darle clic este haga dos cosas a la vez, una que desaparezca el mensaje
+y la segunda es que envie el mensaje "recibido".
+

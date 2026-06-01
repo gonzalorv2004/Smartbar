@@ -1,4 +1,4 @@
- Gonzalo R.V.  Wednesday  6 May 2026 12:30
+ Gonzalo R.V.  Monday  1 June 2026 09:37
 [ubuntu@ip-172-31-31-247 smartbar]$sudo tree
 .
 ├── backend
@@ -48,6 +48,7 @@
 │   │   │   ├── functionCall.js
 │   │   │   ├── index.d.ts
 │   │   │   ├── index.js
+│   │   │   ├── package.json
 │   │   │   ├── reflectApply.d.ts
 │   │   │   ├── reflectApply.js
 │   │   │   ├── test
@@ -831,12 +832,56 @@
 │   ├── package-lock.json
 │   └── package.json
 ├── backup.sql
+├── backup_smartbar.sql
 ├── docker-compose.yml
 ├── frontend
-│   └── index.html
-└── nginx
-    └── default.conf
+│   ├── acceso_denegado.html
+│   ├── conserje.php
+│   ├── css
+│   │   ├── admin.css
+│   │   ├── cocina.css
+│   │   ├── conserje.css
+│   │   ├── gerente.css
+│   │   ├── login.css
+│   │   ├── pedido.css
+│   │   └── solicitud.css
+│   ├── curriculums
+│   │   ├── 1780245589_697053490_35333714446273009_9163833267951151528_n.jpg
+│   │   └── 1780246005_680931526_17962447542106273_8100109296186925424_n.jpg
+│   ├── index.html
+│   ├── php
+│   │   ├── acceso.php
+│   │   ├── actualizar_estado.php
+│   │   ├── actualizar_usuario.php
+│   │   ├── bbdd.php
+│   │   ├── borrar_mensaje.php
+│   │   ├── cocina.php
+│   │   ├── confirmar_mensaje.php
+│   │   ├── confirmar_mensaje_gerente.php
+│   │   ├── contratar.php
+│   │   ├── dashboard.php
+│   │   ├── enviar_mensaje.php
+│   │   ├── enviar_mensaje_conserje.php
+│   │   ├── gerente.php
+│   │   ├── login.php
+│   │   ├── logout.php
+│   │   ├── pedido_llevar.php
+│   │   ├── pedido_tomar.php
+│   │   ├── procesarPedido.php
+│   │   ├── procesar_contratacion.php
+│   │   ├── rechazar.php
+│   │   ├── servir_pedido.php
+│   │   ├── telegram.php
+│   │   ├── testdb.php
+│   │   └── ver_pedidos.php
+│   ├── seleccion_pedido.php
+│   ├── solicitud_empleo.php
+│   └── test.php
+├── nginx
+│   └── default.conf
+└── php
+    └── Dockerfile
 
-144 directories, 693 files
- Gonzalo R.V.  Wednesday  6 May 2026 12:30
+148 directories, 733 files
+ Gonzalo R.V.  Monday  1 June 2026 09:37
 [ubuntu@ip-172-31-31-247 smartbar]$

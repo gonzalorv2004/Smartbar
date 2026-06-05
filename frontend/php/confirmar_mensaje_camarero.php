@@ -4,14 +4,6 @@
 
     $id = $_GET['id'];
 
-    $mensaje = pg_fetch_assoc(
-        pg_query_params(
-            $conn,
-            "SELECT * FROM mensajes WHERE id=$1",
-            array($id)
-        )
-    );
-
     pg_query_params(
         $conn,
         "
@@ -21,7 +13,7 @@
         array(
             'sistema',
             'gerente',
-            'Recibido por cocina'
+            'Recibido por camarero'
         )
     );
 
@@ -31,7 +23,7 @@
         array($id)
     );
 
-    header("Location: cocina.php");
+    header("Location: pedido_llevar.php");
     exit();
 
 ?>

@@ -199,18 +199,66 @@
 
         <h2>📩 Mensajes de empleados</h2>
 
+        <h2>Escribir a cocina</h2>
+
+        <form action="enviar_mensaje.php" method="POST">
+
+            <input type="hidden" name="emisor" value="gerente">
+            <input type="hidden" name="destinatario" value="cocina">
+
+            <textarea name="mensaje" required></textarea>
+
+            <button type="submit">
+                Enviar a cocina
+            </button>
+
+        </form>
+
+        <br><br>
+
+        <h2>Escribir a conserje</h2>
+
+        <form action="enviar_mensaje.php" method="POST">
+
+            <input type="hidden" name="emisor" value="gerente">
+            <input type="hidden" name="destinatario" value="conserje">
+
+            <textarea name="mensaje" required></textarea>
+
+            <button type="submit">
+                Enviar a conserje
+            </button>
+
+        </form>
+
         <?php if($mensajes){ foreach($mensajes as $m){ ?>
 
-        <p>
-            <strong>[<?php echo $m['emisor']; ?>]</strong>
-            <?php echo $m['mensaje']; ?>
-            <a href="confirmar_mensaje_gerente.php?id=<?php echo $m['id']; ?>"
-            style="text-decoration:none;font-size:22px;">
-                <button class="btn-msg">👍 Confirmar</button>
-            </a>
-        </p>
+            <p>
+                <strong>[<?php echo $m['emisor']; ?>]</strong>
+                <?php echo $m['mensaje']; ?>
+                <a href="confirmar_mensaje_gerente.php?id=<?php echo $m['id']; ?>"
+                style="text-decoration:none;font-size:22px;">
+                    <button class="btn-msg">👍 Confirmar</button>
+                </a>
+            </p>
 
         <?php }} ?>
+        
+        <h2>Responder a camarero</h2>
+
+        <form action="enviar_mensaje.php" method="POST">
+
+            <input type="hidden" name="emisor" value="gerente">
+            <input type="hidden" name="destinatario" value="camarero">
+
+            <textarea name="mensaje" required></textarea>
+            <br><br>
+
+            <button type="submit">
+                Enviar a camarero
+            </button>
+
+        </form>
 
     </body>
 

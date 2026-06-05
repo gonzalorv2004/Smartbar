@@ -44,7 +44,13 @@
             foreach ($pedidos as $pedido) {
                 echo "<tr>";
                 echo "<td>".$pedido['id']."</td>";
-                echo "<td>".$pedido['nombre_cliente']."</td>";
+
+                if ($pedido['tipo_pedido'] == 'tomar') {
+                    echo "<td>Mesa Nº ".$pedido['mesa']."</td>";
+                } else {
+                    echo "<td>".$pedido['nombre_cliente']."</td>";
+                }
+                
                 echo "<td>".$pedido['estado']."</td>";
                 echo "<td>";
 

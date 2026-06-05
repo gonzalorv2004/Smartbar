@@ -33,6 +33,7 @@
     $nombre = $_POST['nombre'];
     $telefono = $_POST['telefono'];
     $direccion = $_POST['direccion'];
+    $mesa = $_POST['mesa'] ?? null;
     $tipo_pedido = ($_POST['tipo_vuelta'] == 'pedido_tomar.php')
     ? 'tomar'
     : 'llevar';
@@ -60,9 +61,10 @@
     telefono,
     direccion,
     estado,
-    tipo_pedido
+    tipo_pedido,
+    mesa
     )
-    VALUES ($1, $2, $3, $4, 'pendiente', $5)
+    VALUES ($1, $2, $3, $4, 'pendiente', $5, $6)
     RETURNING id
     ";
 
@@ -74,7 +76,8 @@
             $nombre,
             $telefono,
             $direccion,
-            $tipo_pedido
+            $tipo_pedido,
+            $mesa
         )
     );
 

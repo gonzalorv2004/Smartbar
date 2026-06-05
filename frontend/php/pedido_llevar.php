@@ -1,20 +1,20 @@
 <?php
 
-require 'bbdd.php';
+    require 'bbdd.php';
 
-session_start();
+    session_start();
 
-if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
+    if (!isset($_SESSION['user']) || $_SESSION['user'] == "") {
 
-    header("Location: acceso.php");
-    exit();
-}
+        header("Location: acceso.php");
+        exit();
+    }
 
-$query = "SELECT * FROM productos ORDER BY id";
+    $query = "SELECT * FROM productos ORDER BY id";
 
-$resultado = pg_query($conn, $query);
+    $resultado = pg_query($conn, $query);
 
-$productos = pg_fetch_all($resultado);
+    $productos = pg_fetch_all($resultado);
 
 ?>
 
@@ -64,6 +64,7 @@ $productos = pg_fetch_all($resultado);
                     <tr>
                         <th>ID</th>
                         <th>Producto</th>
+                        <th>Categoría</th>
                         <th>Precio</th>
                         <th>Stock</th>
                         <th>Cantidad</th>
@@ -77,9 +78,18 @@ $productos = pg_fetch_all($resultado);
 
                             <td><?php echo $producto['nombre']; ?></td>
 
+                            <td><?php echo $producto['categoria']; ?></td>
+
                             <td><?php echo $producto['precio']; ?> €</td>
 
-                            <td><?php echo $producto['stock']; ?></td>
+                            <td>
+                                <?php echo $producto['stock']; ?>
+
+                                <?php if ($producto['stock'] <= 10) { ?>
+                                    <br>
+                                    <strong style="color:red;">⚠ Stock bajo</strong>
+                                <?php } ?>
+                            </td>
 
                             <td>
 
@@ -107,7 +117,49 @@ $productos = pg_fetch_all($resultado);
             </form>
 
             <br><br>
+            <hr>
 
+            <h2>📩 Mensajes del gerente</h2>
+
+            <?php
+                $mensajes = pg_fetch_all(pg_query($conn, "
+                SELECT * FROM mensajes
+                WHERE destinatario='camarero'
+                ORDER BY id DESC
+                "));
+
+                if ($mensajes) {
+                    foreach ($mensajes as $m) {
+                        echo "<p>";
+                        echo $m['mensaje'];
+
+                        echo ' <a href="confirmar_mensaje_camarero.php?id='.$m['id'].'">👍</a>';
+
+                        echo ' <a href="borrar_mensaje.php?id='.$m['id'].'">❌</a>';
+
+                        echo "</p>";
+                    }
+                }
+            ?>
+
+            <hr>
+
+            <h2>📨 Escribir al gerente</h2>
+
+            <form action="enviar_mensaje.php" method="POST">
+
+                <input type="hidden" name="emisor" value="camarero">
+                <input type="hidden" name="destinatario" value="gerente">
+
+                <textarea name="mensaje" required></textarea>
+                <br><br>
+
+                <button type="submit">
+                    Enviar al gerente
+                </button>
+
+            </form>
+            
             <a href="logout.php">
                 Cerrar sesión
             </a>

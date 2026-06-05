@@ -1,20 +1,10 @@
 <?php
 
-    session_start();
     require 'bbdd.php';
-    require 'telegram.php';
 
-    if (!isset($_SESSION['user'])) {
-        header("Location: acceso.php");
-        exit();
-    }
-
+    $emisor = $_POST['emisor'];
+    $destinatario = $_POST['destinatario'];
     $mensaje = $_POST['mensaje'];
-
-    enviarTelegram("🚨 SmartBar\n\nMensaje de cocina:\n" . $mensaje);
-
-    $emisor = 'cocina';
-    $destinatario = 'gerente';
 
     $query = "
     INSERT INTO mensajes (emisor, destinatario, mensaje)
@@ -27,7 +17,24 @@
         array($emisor, $destinatario, $mensaje)
     );
 
-    header("Location: cocina.php");
+    if ($emisor == 'gerente') {
+    header("Location: gerente.php");
+    }
+    elseif ($emisor == 'camarero') {
+
+        $tipo_vuelta = $_POST['tipo_vuelta'] ?? 'pedido_llevar.php';
+
+        if ($tipo_vuelta == 'pedido_tomar.php') {
+            header("Location: pedido_tomar.php");
+        } else {
+            header("Location: pedido_llevar.php");
+        }
+
+    }
+    else {
+        header("Location: cocina.php");
+    }
+
     exit();
 
 ?>

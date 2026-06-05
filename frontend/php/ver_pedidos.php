@@ -41,6 +41,10 @@
 
     $pedidos = pg_fetch_all($resultado);
 
+    $queryProductos = "SELECT * FROM productos ORDER BY id";
+    $resultadoProductos = pg_query($conn, $queryProductos);
+    $productos = pg_fetch_all($resultadoProductos);
+
 ?>
 
 <!DOCTYPE html>
@@ -139,48 +143,163 @@
 
         <br><br>
 
+        <hr>
+
+        <h2>➕ Añadir producto</h2>
+
+        <form action="agregar_producto.php" method="POST">
+
+            <label>Nombre:</label><br>
+            <input type="text" name="nombre" required><br><br>
+
+            <label>Categoría:</label><br>
+            <input type="text" name="categoria" required><br><br>
+
+            <label>Precio:</label><br>
+            <input type="number" step="0.01" name="precio" required><br><br>
+
+            <label>Stock:</label><br>
+            <input type="number" name="stock" required><br><br>
+
+            <button type="submit">
+                Añadir producto
+            </button>
+
+        </form>
+
+        <br><br>
+
+        <hr>
+
+        <h2>📦 Gestión de inventario</h2>
+
+        <table border="1">
+
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+
+            <?php if ($productos) { ?>
+                <?php foreach ($productos as $producto) { ?>
+
+                    <tr>
+
+                        <td><?php echo $producto['id']; ?></td>
+
+                        <td><?php echo $producto['nombre']; ?></td>
+
+                        <td><?php echo $producto['categoria']; ?></td>
+
+                        <td><?php echo $producto['precio']; ?> €</td>
+
+                        <td>
+                            <?php echo $producto['stock']; ?>
+
+                            <?php if ($producto['stock'] <= 10) { ?>
+                                <strong style="color:red;"> ⚠ Bajo</strong>
+                            <?php } ?>
+                        </td>
+
+                        <td>
+
+                            <a href="sumar_stock.php?id=<?php echo $producto['id']; ?>">
+                                <button>+1 Stock</button>
+                            </a>
+
+                            <a href="editar_producto.php?id=<?php echo $producto['id']; ?>">
+                                <button>✏ Editar</button>
+                            </a>
+
+                            <a href="eliminar_producto.php?id=<?php echo $producto['id']; ?>">
+                                <button>❌ Eliminar</button>
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php } ?>
+            <?php } ?>
+
+        </table>
+
+        <hr>
+
+        <h2>Mensajes de cocina</h2>
+
+        <?php
+        $mensajes = pg_fetch_all(pg_query($conn, "
+        SELECT * FROM mensajes
+        WHERE destinatario='gerente'
+        AND (emisor='cocina' OR emisor='conserje')
+        ORDER BY id DESC
+        "));
+
+        if ($mensajes) {
+            foreach ($mensajes as $m) {
+                echo "<p>";
+                echo "<strong>[" . $m['emisor'] . "]</strong> " . $m['mensaje'];
+                echo ' <a href="borrar_mensaje.php?id='.$m['id'].'">❌</a>';
+                echo "</p>";
+            }
+        }
+        ?>
+
+        <h2>Responder a cocina</h2>
+
+        <form action="enviar_mensaje.php" method="POST">
+
+            <input type="hidden" name="emisor" value="gerente">
+            <input type="hidden" name="destinatario" value="cocina">
+
+            <textarea name="mensaje" required></textarea>
+            <br><br>
+
+            <button type="submit">
+                Enviar respuesta
+            </button>
+
+        </form>
+
+        <h2>Responder a conserje</h2>
+
+        <form action="enviar_mensaje.php" method="POST">
+
+            <input type="hidden" name="emisor" value="gerente">
+            <input type="hidden" name="destinatario" value="conserje">
+
+            <textarea name="mensaje" required></textarea>
+            <br><br>
+
+            <button type="submit">
+                Enviar respuesta
+            </button>
+
+        </form>
+
+        <h2>Responder a camarero</h2>
+
+        <form action="enviar_mensaje.php" method="POST">
+
+            <input type="hidden" name="emisor" value="gerente">
+            <input type="hidden" name="destinatario" value="camarero">
+
+            <textarea name="mensaje" required></textarea>
+            <br><br>
+
+            <button type="submit">
+                Enviar a camarero
+            </button>
+
+        </form>
+
         <a href="logout.php">
             Cerrar sesión
         </a>
-
     </body>
-
-    <hr>
-
-    <h2>Mensajes de cocina</h2>
-
-    <?php
-    $mensajes = pg_fetch_all(pg_query($conn, "
-    SELECT * FROM mensajes
-    WHERE destinatario='gerente'
-    AND (emisor='cocina' OR emisor='conserje')
-    ORDER BY id DESC
-    "));
-
-    if ($mensajes) {
-        foreach ($mensajes as $m) {
-            echo "<p>";
-            echo "<strong>[" . $m['emisor'] . "]</strong> " . $m['mensaje'];
-            echo ' <a href="borrar_mensaje.php?id='.$m['id'].'">❌</a>';
-            echo "</p>";
-        }
-    }
-    ?>
-
-    <h2>Responder a cocina</h2>
-
-    <form action="enviar_mensaje.php" method="POST">
-
-        <input type="hidden" name="emisor" value="gerente">
-        <input type="hidden" name="destinatario" value="cocina">
-
-        <textarea name="mensaje" required></textarea>
-        <br><br>
-
-        <button type="submit">
-            Enviar respuesta
-        </button>
-
-    </form>
-
 </html>

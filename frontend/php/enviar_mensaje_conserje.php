@@ -1,6 +1,7 @@
 <?php
 
     session_start();
+
     require 'bbdd.php';
     require 'telegram.php';
 
@@ -11,7 +12,19 @@
 
     $mensaje = $_POST['mensaje'];
 
-    enviarTelegram("🚨 SmartBar\n\nMensaje de conserjería:\n" . $mensaje);
+    $usuario = $_SESSION['user'];
+    $hora = date('d/m/Y H:i:s');
+    $destinatario = "Gerente";
+
+    $textoTelegram =
+    "🚨 SmartBar\n\n" .
+    "📨 Nuevo mensaje interno\n\n" .
+    "👤 Usuario: $usuario\n" .
+    "📬 Destinatario: $destinatario\n" .
+    "🕒 Hora: $hora\n\n" .
+    "💬 Mensaje:\n$mensaje";
+
+    enviarTelegram($textoTelegram);
 
     $query = "
     INSERT INTO mensajes (emisor, destinatario, mensaje)
@@ -28,7 +41,7 @@
         )
     );
 
-    header("Location: ../conserje.html");
+    header("Location: ../conserje.php");
     exit();
 
 ?>

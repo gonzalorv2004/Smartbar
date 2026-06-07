@@ -24,6 +24,7 @@
         if ($passf == $usuario['password']) {
 
             $_SESSION['user'] = $usuario['nombre'];
+            $_SESSION['rol'] = $usuario['rol'];
 
             $_SESSION['intentos'] = 0;
 

@@ -2,9 +2,18 @@
 
     require 'bbdd.php';
 
+    require 'telegram.php';
+
     $emisor = $_POST['emisor'];
     $destinatario = $_POST['destinatario'];
     $mensaje = $_POST['mensaje'];
+
+    enviarTelegram(
+        "🚨 SmartBar\n\n" .
+        "Mensaje de " . $emisor .
+        " para " . $destinatario .
+        ":\n" . $mensaje
+    );
 
     $query = "
     INSERT INTO mensajes (emisor, destinatario, mensaje)

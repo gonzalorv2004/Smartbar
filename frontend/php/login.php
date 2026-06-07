@@ -21,11 +21,6 @@
 
     if (pg_num_rows($resultado) == 1) {
 
-        $usuario = pg_fetch_assoc($resultado);
-
-        var_dump($usuario['rol']);
-        exit();
-
         if ($passf == $usuario['password']) {
 
             $_SESSION['user'] = $usuario['nombre'];
@@ -87,7 +82,7 @@
 
         if ($_SESSION['intentos'] >= 3) {
 
-            header("Location: acceso_denegado.html");
+            header("Location: ../acceso_denegado.html");
             exit();
 
         } else {
@@ -97,6 +92,7 @@
             header("Location: acceso.php?error=1");
             exit();
         }
+
     }
 
 ?>
